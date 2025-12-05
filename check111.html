@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blaze King Digital Printing - Your Vision, Perfectly Printed</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        /* Preloader Styles */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ff5353 0%, #ff8a00 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .preloader-content {
+            text-align: center;
+            color: white;
+        }
+        
+        .preloader-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: pulse 1.5s infinite, rotate 4s linear infinite;
+        }
+        
+        .preloader-logo i {
+            font-size: 3.5rem;
+        }
+        
+        .loading-bar {
+            width: 200px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+        
+        .loading-progress {
+            height: 100%;
+            width: 0%;
+            background: white;
+            border-radius: 4px;
+            animation: loading 3s ease-in-out forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes loading {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+        
+        /* Navbar Styles */
+        .navbar {
+            background-color: rgba(255, 83, 83, 0.95) !important;
+            padding: 0.8rem 1rem;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease;
+        }
+        
+        .navbar.scrolled {
+            background-color: rgba(255, 83, 83, 0.98) !important;
+            padding: 0.5rem 1rem;
+        }
+        
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.8rem;
+            color: white !important;
+            text-decoration: none;
+        }
+        
+        .logo-container {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: spin 8s linear infinite;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-container:hover {
+            animation-duration: 2s;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+            color: white;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .navbar-nav .nav-link {
+            color: white !important;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .navbar-nav .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #ffd700;
+            transition: width 0.3s ease;
+        }
+        
+        .navbar-nav .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            color: #ffd700 !important;
+            transform: translateY(-2px);
+        }
+        
+        /* Hero Section with Background Image */
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            padding: 150px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-section h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-section p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .typing-text {
+            border-right: 2px solid white;
+            animation: blink 1s infinite;
+            padding-right: 5px;
+        }
+        
+        @keyframes blink {
+            0%, 100% { border-color: transparent; }
+            50% { border-color: white; }
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #ff5353, #ff8a00);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 83, 83, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 83, 83, 0.6);
+        }
+        
+        /* Professional Profile Section */
+        .profile-section {
+            padding: 100px 0;
+            background-color: #f8f9fa;
+        }
+        
+        .profile-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+        }
+        
+        .profile-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: #ff5353;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background: #ff5353;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Services Section with Background */
+        .services-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
+                        url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .services-section h1 {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .services-section h1::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background: #ff5353;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .service-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px 20px;
+            margin-bottom: 30px;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.7s ease;
+        }
+        
+        .service-card:hover::before {
+            left: 100%;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 83, 83, 0.3);
+            border-color: rgba(255, 83, 83, 0.3);
+        }
+        
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 83, 83, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover .service-icon {
+            background: rgba(255, 83, 83, 0.5);
+            transform: scale(1.1);
+        }
+        
+        .service-icon i {
+            font-size: 2.5rem;
+            color: white;
+        }
+        
+        .service-list {
+            text-align: left;
+            margin-top: 15px;
+            padding-left: 0;
+        }
+        
+        .service-list li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .service-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #ff5353;
+            font-weight: bold;
+        }
+        
+        /* Why Choose Us Section */
+        .features-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #ff5353 0%, #ff8a00 100%);
+            color: white;
+        }
+        
+        .feature-item {
+            text-align: center;
+            padding: 30px 20px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            height: 100%;
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        
+        .feature-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+        
+        /* CTA Section with Background */
+        .cta-section {
+            background: linear-gradient(rgba(255, 83, 83, 0.9), rgba(255, 138, 0, 0.9)), 
+                        url('https://images.unsplash.com/photo-1567446537710-0c5ff5a6ac32?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            padding: 120px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-section h1 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-outline-light {
+            border: 2px solid white;
+            color: white;
+            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-outline-light::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: white;
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+        
+        .btn-outline-light:hover::before {
+            left: 0;
+        }
+        
+        .btn-outline-light:hover {
+            color: #ff5353;
+        }
+        
+        /* Gallery Section */
+        .gallery-section {
+            padding: 100px 0;
+            background: #f8f9fa;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: #ff5353;
+            font-weight: 700;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: #ff5353;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            cursor: pointer;
+            height: 300px;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 83, 83, 0.3);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 20px;
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
+            color: white;
+            padding: 100px 0;
+        }
+        
+        .contact-section h1 {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .contact-section h1::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background: #ff5353;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .contact-form {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .form-control {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 15px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #ff5353;
+            box-shadow: 0 0 0 0.25rem rgba(255, 83, 83, 0.25);
+            color: white;
+        }
+        
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(45deg, #ff5353, #ff8a00);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .btn-danger:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 83, 83, 0.4);
+        }
+        
+        .contact-info {
+            margin-top: 30px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .contact-info h4 {
+            color: #ff5353;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info i {
+            color: #ff5353;
+            margin-right: 10px;
+            width: 20px;
+        }
+        
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #222222 0%, #000000 100%);
+            color: white;
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+        
+        .footer-logo {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 83, 83, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        .footer-logo i {
+            font-size: 2.5rem;
+            color: #ff5353;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background: #ff5353;
+            transform: translateY(-5px);
+        }
+        
+        .business-hours {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Stats Counter */
+        .stats-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
+            color: white;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 30px 20px;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #ff5353;
+            margin-bottom: 10px;
+        }
+        
+        /* Testimonials */
+        .testimonial-section {
+            padding: 100px 0;
+            background: linear-gradient(rgba(255, 83, 83, 0.05), rgba(255, 138, 0, 0.05));
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+            height: 100%;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff5353 0%, #ff8a00 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            font-weight: bold;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .services-section h1,
+            .cta-section h1,
+            .contact-section h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title h2,
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-section,
+            .services-section,
+            .cta-section {
+                background-attachment: scroll;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">
+                <i class="fas fa-fire"></i>
+            </div>
+            <h2>Blaze King Digital Printing</h2>
+            <p>Your Vision, Perfectly Printed...</p>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <div class="logo-container">
+                    <i class="fas fa-fire logo-icon"></i>
+                </div>
+                Blaze King
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#profile">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Why Choose Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#gallery">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonials">Testimonials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container hero-content">
+            <h1 data-aos="fade-up" data-aos-duration="1000">Your Vision, <span class="typing-text">Perfectly Printed</span></h1>
+            <p class="lead" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">Full-service digital printing company located on Okpanam Road, Asaba. We specialize in transforming ideas into high-quality, tangible results with precision, speed, and affordability.</p>
+            <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                <a href="#contact" class="btn btn-primary btn-lg">Get Free Quote Today</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Counter -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="stat-item" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="stat-number" data-count="5000">0</div>
+                        <p>Projects Completed</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="stat-item" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="stat-number" data-count="1500">0</div>
+                        <p>Happy Clients</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="stat-item" data-aos="zoom-in" data-aos-delay="300">
+                        <div class="stat-number" data-count="8">0</div>
+                        <p>Years Experience</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="stat-item" data-aos="zoom-in" data-aos-delay="400">
+                        <div class="stat-number" data-count="24">0</div>
+                        <p>Hour Support</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Profile Section -->
+    <section id="profile" class="profile-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Professional Profile</h2>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="profile-card" data-aos="fade-up" data-aos-delay="200">
+                        <h3 class="text-center mb-4" style="color: #ff5353;">Blaze King Digital Printing</h3>
+                        <p class="lead text-center mb-4" data-aos="fade-up" data-aos-delay="300">We are a full-service digital printing company located on the bustling Okpanam Road in Asaba, Delta State. Strategically positioned before Century Filling Station for easy access, we specialize in transforming ideas into high-quality, tangible results. Our commitment is to deliver precision, speed, and affordability for businesses, events, and individuals across the region.</p>
+                        
+                        <div class="row mt-4">
+                            <div class="col-md-6" data-aos="fade-right" data-aos-delay="400">
+                                <h5 style="color: #ff5353;">Technical Capabilities</h5>
+                                <ul class="service-list">
+                                    <li>High-Resolution Digital Printing (Small & Large Format)</li>
+                                    <li>Professional Color Management & Matching</li>
+                                    <li>Lamination & Protective Coating</li>
+                                    <li>Precision Cutting & Finishing</li>
+                                    <li>Graphic Design Support Services</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6" data-aos="fade-left" data-aos-delay="400">
+                                <h5 style="color: #ff5353;">Location Advantage</h5>
+                                <p><i class="fas fa-map-marker-alt"></i> Okpanam Road (Before Century Filling Station)<br>Asaba, Delta State</p>
+                                <p><i class="fas fa-clock"></i> Easy Access & Convenient Location</p>
+                                <p><i class="fas fa-truck"></i> Reliable Delivery Services</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <h1 data-aos="fade-up">Our Printing Services</h1>
+            <div class="row mt-5">
+                <!-- Signage & Display Solutions -->
+                <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-sign"></i>
+                        </div>
+                        <h4>Signage & Display</h4>
+                        <ul class="service-list">
+                            <li>Indoor/Outdoor Banners</li>
+                            <li>Vehicle Graphics</li>
+                            <li>PVC & Construction Signs</li>
+                            <li>Stickers & Decals</li>
+                            <li>Window Graphics</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Promotional Materials -->
+                <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <h4>Promotional Materials</h4>
+                        <ul class="service-list">
+                            <li>Flyers & Brochures</li>
+                            <li>Business Cards</li>
+                            <li>Event Programs</li>
+                            <li>Invitations & Tickets</li>
+                            <li>Letterheads</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Sublimation & Gift Items -->
+                <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <h4>Sublimation & Gifts</h4>
+                        <ul class="service-list">
+                            <li>Custom Printed Mugs</li>
+                            <li>Branded T-Shirts</li>
+                            <li>Personalized Caps</li>
+                            <li>Cushions & Puzzles</li>
+                            <li>Keyholders & More</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Commercial Printing -->
+                <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-print"></i>
+                        </div>
+                        <h4>Commercial Printing</h4>
+                        <ul class="service-list">
+                            <li>Roll-up Banners</li>
+                            <li>ID Cards & Lanyards</li>
+                            <li>Magazines & Books</li>
+                            <li>Manuals & Reports</li>
+                            <li>All Kinds of Prints</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 style="color: white;">Why Choose Blaze King?</h2>
+            </div>
+            <div class="row mt-5">
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h4>Prime Location</h4>
+                        <p>Easily accessible on Okpanam Road, Asaba, before Century Filling Station.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                        <h4>Fast Turnaround</h4>
+                        <p>We respect deadlines and offer reliable delivery timelines for all projects.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>Expert Guidance</h4>
+                        <p>Professional advice on materials, formats, and designs for project success.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h4>Modern Technology</h4>
+                        <p>Advanced digital printers and finishing equipment for superior quality.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="500">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h4>Customer-Centric</h4>
+                        <p>We work closely with clients from concept to final product for complete satisfaction.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="600">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-tags"></i>
+                        </div>
+                        <h4>Competitive Pricing</h4>
+                        <p>High-quality printing solutions that offer great value for money.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container cta-content">
+            <h1 data-aos="fade-up">Ready to Bring Your Ideas to Life?</h1>
+            <p class="lead mb-4" data-aos="fade-up" data-aos-delay="200">Contact us today for a free quote on your next printing project.</p>
+            <a href="#contact" class="btn btn-outline-light btn-lg" data-aos="fade-up" data-aos-delay="400">Get Free Quote</a>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Our Printing Portfolio</h2>
+                <p class="mt-3">Explore our wide range of printing projects and services</p>
+            </div>
+            <div class="gallery-grid">
+                <!-- Signage Examples -->
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+                    <img src="blazeking/WhatsApp Image 2025-10-23 at 14.50.55_fa42a133.jpg" alt="Signage Design">
+                    <div class="gallery-overlay">
+                        <h5>Outdoor Signage</h5>
+                        <p>Durable & eye-catching business signs</p>
+                    </div>
+                </div>
+                
+                <!-- Mug Printing -->
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="150">
+                    <img src="blazeking/WhatsApp Image 2025-10-23 at 14.50.55_adeb9d9b.jpg" alt="Printed Mugs">
+                    <div class="gallery-overlay">
+                        <h5>Custom Printed Mugs</h5>
+                        <p>Personalized sublimation products</p>
+                    </div>
+                </div>
+                
+                <!-- Flyers/Brochures -->
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+                    <img src="blazeking/WhatsApp Image 2025-10-23 at 14.50.56_915bb0bc.jpg" alt="Flyer Design">
+                    <div class="gallery-overlay">
+                        <h5>Promotional Flyers</h5>
+                        <p>High-quality promotional materials</p>
+                    </div>
+                </div>
+                
+                <!-- More Signage -->
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="250">
+                    <img src="blazeking/WhatsApp Image 2025-10-23 at 14.50.56_be313f04.jpg" alt="Business Signage">
+                    <div class="gallery-overlay">
+                        <h5>Business Signage</h5>
+                        <p>Professional business identification</p>
+                    </div>
+                </div>
+                
+                <!-- Additional Printing Samples -->
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="300">
+                    <img src="blazeking/WhatsApp Image 2025-10-23 at 14.50.58_753cf73f.jpg" alt="Print Samples">
+                    <div class="gallery-overlay">
+                        <h5>Print Samples</h5>
+                        <p>Various printing applications</p>
+                    </div>
+                </div>
+                
+                <!-- More Portfolio Items -->
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="350">
+                    <img src="blazeking/WhatsApp Image 2025-10-23 at 14.50.58_f2661d68.jpg" alt="Print Portfolio">
+                    <div class="gallery-overlay">
+                        <h5>Portfolio Collection</h5>
+                        <p>Our diverse printing capabilities</p>
+                    </div>
+                </div>
+                
+                <!-- Add more images from your collection -->
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="400">
+                    <img src="blazeking/WhatsApp Image 2025-10-23 at 14.51.00_b57e81e3.jpg" alt="Print Work">
+                    <div class="gallery-overlay">
+                        <h5>Creative Prints</h5>
+                        <p>Innovative printing solutions</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="450">
+                    <img src="blazeking/WhatsApp Image 2025-10-23 at 14.51.03_25338ab3.jpg" alt="Print Examples">
+                    <div class="gallery-overlay">
+                        <h5>Print Examples</h5>
+                        <p>Quality that speaks volumes</p>
+                    </div>
+                </div>
+
+                <!-- Additional Images -->
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+                    <img src="blazeking/WhatsApp Image 2025-10-23 at 14.51.05_0f2a6504.jpg" alt="Print Design">
+                    <div class="gallery-overlay">
+                        <h5>Design Solutions</h5>
+                        <p>Creative design and printing</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="150">
+                    <img src="blazeking/WhatsApp Image 2025-10-23 at 14.51.05_306055da.jpg" alt="Custom Prints">
+                    <div class="gallery-overlay">
+                        <h5>Custom Prints</h5>
+                        <p>Tailored to your needs</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+                    <img src="blazeking/WhatsApp Image 2025-10-23 at 14.51.08_2362d2ea.jpg" alt="Quality Prints">
+                    <div class="gallery-overlay">
+                        <h5>Quality Prints</h5>
+                        <p>Premium printing services</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="250">
+                    <img src="blazeking/WhatsApp Image 2025-10-23 at 14.51.09_eab0d158.jpg" alt="Branding Materials">
+                    <div class="gallery-overlay">
+                        <h5>Branding Materials</h5>
+                        <p>Complete branding solutions</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="300">
+                    <img src="blazeking/WhatsApp Image 2025-10-23 at 14.51.12_8ab58753.jpg" alt="Large Format">
+                    <div class="gallery-overlay">
+                        <h5>Large Format</h5>
+                        <p>Big scale printing projects</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="350">
+                    <img src="blazeking/WhatsApp Image 2025-10-23 at 14.51.14_2c66f41a.jpg" alt="Event Printing">
+                    <div class="gallery-overlay">
+                        <h5>Event Printing</h5>
+                        <p>Special event materials</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="400">
+                    <img src="blazeking/WhatsApp Image 2025-10-23 at 14.51.31_793bd12e.jpg" alt="Corporate Printing">
+                    <div class="gallery-overlay">
+                        <h5>Corporate Printing</h5>
+                        <p>Business printing solutions</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="450">
+                    <img src="blazeking/WhatsApp Image 2025-10-23 at 14.51.32_6e7d77bc.jpg" alt="Signage Production">
+                    <div class="gallery-overlay">
+                        <h5>Signage Production</h5>
+                        <p>Professional signage creation</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonial-section">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>What Our Clients Say</h2>
+                <p class="mt-3">Hear from businesses and individuals who have experienced our exceptional printing services</p>
+            </div>
+            <div class="row mt-5">
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "Blaze King delivered exceptional quality prints for our restaurant signage. The attention to detail and quick turnaround was impressive!"
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">JM</div>
+                            <div>
+                                <h6>John Michael</h6>
+                                <p>Restaurant Owner, Asaba</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "Our company brochures and business cards came out perfectly. Professional service and competitive pricing. Highly recommended!"
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">SA</div>
+                            <div>
+                                <h6>Sarah Adebayo</h6>
+                                <p>Marketing Manager, Delta Corp</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            "The custom printed mugs for our wedding were absolutely beautiful! Blaze King captured our vision perfectly. Thank you!"
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">CO</div>
+                            <div>
+                                <h6>Chioma Okeke</h6>
+                                <p>Event Planner, Asaba</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h1 data-aos="fade-up">Contact Us Today</h1>
+            <div class="row mt-5">
+                <div class="col-lg-8" data-aos="fade-right" data-aos-delay="200">
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="name" class="form-label">Your Name *</label>
+                                    <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="phone" class="form-label">Phone Number *</label>
+                                    <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="service" class="form-label">Service Interested In *</label>
+                                <select class="form-select" id="service" required>
+                                    <option value="" selected>Select a service</option>
+                                    <option value="signage">Signage & Display Solutions</option>
+                                    <option value="promotional">Promotional & Event Materials</option>
+                                    <option value="sublimation">Sublimation & Gift Items</option>
+                                    <option value="commercial">General Commercial Printing</option>
+                                    <option value="other">Other Printing Services</option>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <label for="message" class="form-label">Project Details *</label>
+                                <textarea class="form-control" id="message" rows="4" placeholder="Tell us about your project, including size, quantity, and any specific requirements" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-danger btn-lg">Send Message for Quote</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-left" data-aos-delay="200">
+                    <div class="contact-info">
+                        <h4>Contact Information</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> <strong>Address:</strong><br>Okpanam Road (Before Century Filling Station)<br>Asaba, Delta State</p>
+                        <p><i class="fas fa-phone"></i> <strong>Phone:</strong><br>+234 801 234 5678</p>
+                        <p><i class="fab fa-whatsapp"></i> <strong>WhatsApp:</strong><br>+234 801 234 5678</p>
+                        <p><i class="fas fa-envelope"></i> <strong>Email:</strong><br>info@blazekingprinting.com</p>
+                        
+                        <h4 class="mt-4">Business Hours</h4>
+                        <p><i class="fas fa-clock"></i> <strong>Monday - Friday:</strong> 8:30 AM - 6:30 PM</p>
+                        <p><i class="fas fa-clock"></i> <strong>Saturday:</strong> 9:00 AM - 4:00 PM</p>
+                        <p><i class="fas fa-clock"></i> <strong>Sunday:</strong> Closed (Urgent requests available)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo" data-aos="zoom-in">
+                <i class="fas fa-fire"></i>
+            </div>
+            <h3 data-aos="fade-up">Blaze King Digital Printing</h3>
+            <p data-aos="fade-up" data-aos-delay="100">Your Vision, Perfectly Printed</p>
+            <p data-aos="fade-up" data-aos-delay="200">Okpanam Road (Before Century Filling Station), Asaba, Delta State</p>
+            
+            <div class="social-icons mt-4" data-aos="fade-up" data-aos-delay="300">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="https://wa.me/2348012345678"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            
+            <div class="business-hours" data-aos="fade-up" data-aos-delay="400">
+                <p>Monday-Friday: 8:30AM-6:30PM | Saturday: 9:00AM-4:00PM</p>
+            </div>
+            
+            <p class="mt-4" data-aos="fade-up" data-aos-delay="500">&copy; 2025 Blaze King Digital Printing. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: false,
+            mirror: true,
+            offset: 100
+        });
+        
+        // Preloader functionality
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const preloader = document.getElementById('preloader');
+                preloader.style.opacity = '0';
+                setTimeout(function() {
+                    preloader.style.display = 'none';
+                }, 500);
+            }, 3000); // 3 second preloader
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Simple typing effect
+        const typingText = document.querySelector('.typing-text');
+        const texts = ['Perfectly Printed', 'Stunning Signage', 'Custom Mugs', 'Eye-Catching Flyers', 'Quality Prints', 'Creative Designs'];
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        
+        function type() {
+            const currentText = texts[textIndex];
+            
+            if (isDeleting) {
+                typingText.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingText.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+            }
+            
+            if (!isDeleting && charIndex === currentText.length) {
+                setTimeout(() => isDeleting = true, 2000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % texts.length;
+            }
+            
+            setTimeout(type, isDeleting ? 100 : 150);
+        }
+        
+        // Start typing effect after page loads
+        setTimeout(type, 1000);
+        
+        // Form submission handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const service = document.getElementById('service').value;
+            
+            // Simulate form submission
+            alert(`Thank you ${name}! We have received your request for ${service}. We will contact you at ${phone} shortly with a quote.`);
+            
+            // Reset form
+            document.getElementById('contactForm').reset();
+        });
+        
+        // Counter animation for stats
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            const speed = 200;
+            
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-count'));
+                const count = parseInt(counter.innerText);
+                const increment = Math.ceil(target / speed);
+                
+                if (count < target) {
+                    counter.innerText = count + increment;
+                    setTimeout(animateCounters, 1);
+                } else {
+                    counter.innerText = target + '+';
+                }
+            });
+        }
+        
+        // Start counter animation when stats section is in view
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        const statsSection = document.querySelector('.stats-section');
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+    </script>
+</body>
+</html>
