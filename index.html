@@ -1250,24 +1250,24 @@
             <div class="row mt-5">
                 <div class="col-lg-8" data-aos="fade-right" data-aos-delay="200">
                     <div class="contact-form">
-                        <form id="contactForm">
+                        <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="name" class="form-label">Your Name *</label>
-                                    <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="phone" class="form-label">Phone Number *</label>
-                                    <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number" required>
+                                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter your phone number" required>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email Address</label>
-                                <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
                             </div>
                             <div class="mb-3">
                                 <label for="service" class="form-label">Service Interested In *</label>
-                                <select class="form-select" id="service" required>
+                                <select class="form-select" id="service" name="service" required>
                                     <option value="" selected>Select a service</option>
                                     <option value="signage">Signage & Display Solutions</option>
                                     <option value="promotional">Promotional & Event Materials</option>
@@ -1278,7 +1278,7 @@
                             </div>
                             <div class="mb-4">
                                 <label for="message" class="form-label">Project Details *</label>
-                                <textarea class="form-control" id="message" rows="4" placeholder="Tell us about your project, including size, quantity, and any specific requirements" required></textarea>
+                                <textarea class="form-control" id="message" name="message" rows="4" placeholder="Tell us about your project, including size, quantity, and any specific requirements" required></textarea>
                             </div>
                             <button type="submit" class="btn btn-danger btn-lg">Send Message for Quote</button>
                         </form>
@@ -1288,9 +1288,9 @@
                     <div class="contact-info">
                         <h4>Contact Information</h4>
                         <p><i class="fas fa-map-marker-alt"></i> <strong>Address:</strong><br>Okpanam Road (Before Century Filling Station)<br>Asaba, Delta State</p>
-                        <p><i class="fas fa-phone"></i> <strong>Phone:</strong><br>+234 801 234 5678</p>
-                        <p><i class="fab fa-whatsapp"></i> <strong>WhatsApp:</strong><br>+234 801 234 5678</p>
-                        <p><i class="fas fa-envelope"></i> <strong>Email:</strong><br>info@blazekingprinting.com</p>
+                        <p><i class="fas fa-phone"></i> <strong>Phone:</strong><br>+234 8160429832, +2348123247936 </p>
+                        <p><i class="fab fa-whatsapp"></i> <strong>WhatsApp:</strong><br>+234 8160429832</p>
+                        <p><i class="fas fa-envelope"></i> <strong>Email:</strong><br>blazekingconcepts@gmail.com</p>
                         
                         <h4 class="mt-4">Business Hours</h4>
                         <p><i class="fas fa-clock"></i> <strong>Monday - Friday:</strong> 8:30 AM - 6:30 PM</p>
@@ -1308,15 +1308,15 @@
             <div class="footer-logo" data-aos="zoom-in">
                 <i class="fas fa-fire"></i>
             </div>
-            <h3 data-aos="fade-up">Blaze King Digital Printing</h3>
-            <p data-aos="fade-up" data-aos-delay="100">Your Vision, Perfectly Printed</p>
-            <p data-aos="fade-up" data-aos-delay="200">Okpanam Road (Before Century Filling Station), Asaba, Delta State</p>
+            <h3 data-aos="fade-up">Blaze King Concepts</h3>
+            <p data-aos="fade-up" data-aos-delay="100">Home of all digitals</p>
+            <p data-aos="fade-up" data-aos-delay="200">Dankus plaza Okpanam Road (Before Century Filling Station), Asaba, Delta State</p>
             
             <div class="social-icons mt-4" data-aos="fade-up" data-aos-delay="300">
                 <a href="#"><i class="fab fa-facebook-f"></i></a>
                 <a href="#"><i class="fab fa-instagram"></i></a>
                 <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="https://wa.me/2348012345678"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://wa.me/8160429832"><i class="fab fa-whatsapp"></i></a>
             </div>
             
             <div class="business-hours" data-aos="fade-up" data-aos-delay="400">
@@ -1458,6 +1458,63 @@
             observer.observe(statsSection);
         }
     </script>
+
+
+
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form values
+        const name = document.getElementById('name').value;
+        const phone = document.getElementById('phone').value;
+        const email = document.getElementById('email').value;
+        const service = document.getElementById('service').value;
+        const message = document.getElementById('message').value;
+        
+        // Validate required fields
+        if (!name || !phone || !service || !message) {
+            alert('Please fill in all required fields (marked with *)');
+            return;
+        }
+        
+        // Service mapping
+        const serviceMap = {
+            'signage': 'Signage & Display Solutions',
+            'promotional': 'Promotional & Event Materials',
+            'sublimation': 'Sublimation & Gift Items',
+            'commercial': 'General Commercial Printing',
+            'other': 'Other Printing Services'
+        };
+        
+        const serviceText = serviceMap[service] || service;
+        
+        // Create email body
+        const subject = 'Quote Request - ' + name;
+        const body = `New Quote Request:
+        
+    Name: ${name}
+    Phone: ${phone}
+    Email: ${email}
+    Service: ${serviceText}
+    
+    Project Details:
+    ${message}`;
+        
+        // Encode for mailto link
+        const encodedSubject = encodeURIComponent(subject);
+        const encodedBody = encodeURIComponent(body);
+        
+        // Open default email client
+        window.location.href = `mailto:blazekingconcepts@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
+        
+        // Optional: Show confirmation
+        alert('Your email client will open with the message. Please send it to complete your request.');
+    });
+    </script>
+
+
+
 </body>
 </html>
 
@@ -1472,4 +1529,4 @@
 
 
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                bbpppp
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
